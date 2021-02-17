@@ -5,16 +5,18 @@ class TrainingInput extends React.Component {
         super(props);
 
         this.state = {
-            input: ''
+            input: '',
+            type: '',
+            distance: '',
+            comment: ''
         };
     }
 
     addTraining = () => {
-        debugger;
-        const { input } = this.state;
-        if (input) {
-            this.props.addTraining(input);
-            this.setState({input: '' });
+        const { input, type, distance, comment } = this.state;
+        if (input, type, distance, comment) {
+            this.props.addTraining(input, type, distance, comment);
+            this.setState({input: '', type: '', distance: '', comment: ''});
         }
     };
 
@@ -23,14 +25,23 @@ class TrainingInput extends React.Component {
     };
 
     inputChange = event => {
-        this.setState({input: event.target.value});
+        this.setState({
+            input: event.target.value,
+            type: event.target.value,
+            distance: event.target.value,
+            comment: event.target.value
+        });
+        debugger;
     };
 
     render() {
-        const { input } = this.state;
+        const { input, type, distance, comment } = this.state;
         return (
             <div className="task-input">
                 <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={input}></input>
+                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={type}></input>
+                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={distance}></input>
+                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={comment}></input>
                 <button onClick={this.addTraining}>ADD</button>
             </div>
         );

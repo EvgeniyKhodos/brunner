@@ -11,18 +11,18 @@ class App extends React.Component {
                 {
                     id: 0,
                     date: '19.03.2020',
-                    type: 'skiing',
-                    distance: 1,
+                    type: 'run',
+                    distance: 2,
                     comment: '   My first training',
                     title: 'Create todo-react app',
                     done: false
                 },
                 {
                     id: 1,
-                    date: '20.03.2020',
-                    type: 'skiing',
+                    date: '25.03.2020',
+                    type: 'walking',
                     distance: 6,
-                    comment: 'My first trainingsdfsadfsf',
+                    comment: 'Cool',
                     title: 'Learn JavaScript',
                     done: true
                 },
@@ -30,28 +30,19 @@ class App extends React.Component {
                     id: 2,
                     date: '01.05.2019',
                     type: 'skiing',
-                    distance: 14567890,
-                    comment: 'OU!!!',
-                    title: 'Find a good job',
+                    distance: 4,
+                    comment: 'I am tired',
+                    title: 'I am tired',
                     done: false
                 },
                 {
                     id: 3,
-                    date: '19.03.2020',
-                    type: 'skiingdsfadas',
-                    distance: 5,
-                    comment: 'dsfsfMy first training',
+                    date: '19.06.2020',
+                    type: 'scates',
+                    distance: 3,
+                    comment: 'i am full of energy',
                     title: 'Learn JavaScript',
                     done: true
-                },
-                {
-                    id: 4,
-                    date: '19.03.2020',
-                    type: 'skiing',
-                    distance: 5,
-                    comment: 'My first training',
-                    title: 'Find a good job',
-                    done: false
                 }
             ]
         };
@@ -62,7 +53,7 @@ class App extends React.Component {
             let {trainings} = state;
             trainings.push({
                 id: trainings.length !== 0 ? training.length : 0,
-                title: training,
+                type: training,
                 done: false
             });
             return trainings;
@@ -100,9 +91,15 @@ class App extends React.Component {
                 <h1 className="top">
                     <table>
                         <tr>
-                            <td>Дата</td>
-                            <td>Тип тренировки</td>
-                            <td>Дистанция</td>
+                            <td>Дата
+                                <button>Sort</button>
+                            </td>
+                            <td>Тип тренировки
+                                <button>Sort</button>
+                            </td>
+                            <td>Дистанция
+                                <button>Sort</button>
+                            </td>
                             <td>Комментарий</td>
                         </tr>
                     </table>
