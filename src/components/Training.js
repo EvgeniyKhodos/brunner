@@ -17,7 +17,14 @@ const Training = ({training, ...props}) => {
 
     return (
         <div className={className}>
-            <p>{training.title}</p>
+            <table>
+                <tr>
+                    <td>{training.date}</td>
+                    <td>{training.type}</td>
+                    <td>{training.distance}</td>
+                    <td>{training.comment}</td>
+                </tr>
+            </table>
             <ActionBtn></ActionBtn>
         </div>
     );
