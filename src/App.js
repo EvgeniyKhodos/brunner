@@ -1,25 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Training from './components/Training'
+import TrainingInput from "./components/TrainingInput";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            trainings: [
+                {id: 0, date: '19.03.2020', type: 'skiing', distance: 5, comment: 'My first training', title: 'Create todo-react app', done: false},
+                {id: 1, date: '19.03.2020', type: 'skiing', distance: 5, comment: 'My first training', title: 'Learn JavaScript', done: true},
+                {id: 2, date: '19.03.2020', type: 'skiing', distance: 5, comment: 'My first training', title: 'Find a good job', done: false},
+                {id: 3, date: '19.03.2020', type: 'skiing', distance: 5, comment: 'My first training', title: 'Learn JavaScript', done: true},
+                {id: 4, date: '19.03.2020', type: 'skiing', distance: 5, comment: 'My first training', title: 'Find a good job', done: false}
+            ]
+        };
+    };
+
+  addTraining = training => {
+        this.setState(state => {
+            let {trainings} = state;
+            trainings.push({
+                id: trainings.length !== 0 ? training.length : 0,
+                title: training,
+                done: false
+            });
+            return trainings;
+        });
+    };
+
+    doneTraining = id => {
+        const index = this.state.trainings.map(training => training.id).indexOf(id);
+        this.setState(state => {
+            let {trainings} = state;
+            trainings[index].done = true;
+            return trainings;
+        });
+    };
+
+    deleteTraining = id => {
+        const index = this.state.trainings.map(training => training.id).indexOf(id);
+        this.setState(state => {
+            let {trainings} = state;
+            delete trainings[index];
+            return trainings;
+        });
+    };
+
+    render() {
+        const {trainings} = this.state;
+       const activeTrainings = trainings.filter(training => !trainings.done);
+       const doneTrainings = trainings.filter(training => trainings.done);
+
+        return (
+            <div className="App">
+                <h1 className="top">Active tasks: {activeTrainings.length}</h1>
+                {[...activeTrainings, ...doneTrainings].map(training => (
+                    <Training doneTraining={() => this.doneTraining(training.id)}
+                              deleleTraining={() => this.deleteTraining(training.id)}
+                              training={training}
+                              key={training.id}
+                    ></Training>
+                ))}
+             {/* <TrainingInput addTraining={this.addTraining}></TrainingInput>*/}
+            </div>
+        );
+    }
+};
 
 export default App;
