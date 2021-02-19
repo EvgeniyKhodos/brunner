@@ -5,18 +5,18 @@ class TrainingInput extends React.Component {
         super(props);
 
         this.state = {
-            input: '',
+            date: '',
             type: '',
             distance: '',
             comment: ''
         };
     }
 
-    addTraining = () => {
-        const { input, type, distance, comment } = this.state;
-        if (input, type, distance, comment) {
-            this.props.addTraining(input, type, distance, comment);
-            this.setState({input: '', type: '', distance: '', comment: ''});
+  addTraining = () => {
+        const {date, type, distance, comment} = this.state;
+        if (date, type, distance, comment) {
+            this.props.addTraining(date, type, distance, comment);
+            this.setState({date: '', type: '', distance: '', comment: ''});
         }
     };
 
@@ -25,23 +25,42 @@ class TrainingInput extends React.Component {
     };
 
     inputChange = event => {
+        const target = event.target;
+        const value = target.type === 'date' ? target.checked : target.value;
+        const name = target.name;
         this.setState({
-            input: event.target.value,
-            type: event.target.value,
-            distance: event.target.value,
-            comment: event.target.value
+            [name]: value
         });
-        debugger;
     };
 
     render() {
-        const { input, type, distance, comment } = this.state;
+        const {date, type, distance, comment} = this.state;
         return (
             <div className="task-input">
-                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={input}></input>
-                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={type}></input>
-                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={distance}></input>
-                <input onKeyPress={this.handleEnter} onChange={this.inputChange} value={comment}></input>
+                <input
+                    name="date"
+                    type="date"
+                    checked={this.state.date}
+                    onKeyPress={this.handleEnter}
+                    onChange={this.inputChange}></input>
+                <input
+                    name="type"
+                    type="text"
+                    onKeyPress={this.handleEnter}
+                    onChange={this.inputChange}
+                    value={this.state.type}></input>
+                <input
+                    name="distance"
+                    type="number"
+                    onKeyPress={this.handleEnter}
+                    onChange={this.inputChange}
+                    value={this.state.distance}></input>
+                <input
+                    name="comment"
+                    type="text"
+                    onKeyPress={this.handleEnter}
+                    onChange={this.inputChange}
+                    value={this.state.comment}></input>
                 <button onClick={this.addTraining}>ADD</button>
             </div>
         );
